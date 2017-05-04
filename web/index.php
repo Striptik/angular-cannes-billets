@@ -23,6 +23,7 @@
         <h1>Festival de Cannes - Réservations</h1>
     </nav>
     <div class="all">
+        <div ng-controller="ReservationController"></div>
         <div class="container">
             <div class="row">
                 <div class="table-responsive">

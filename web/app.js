@@ -20,11 +20,18 @@ app.controller('FrontController', ['$scope', '$http', '$rootScope', function($sc
 
 }]);
 
-app.controller('ReservationController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
+app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', function($scope, $http, $rootScope, $q) {
     var ctrl = this;
 
     var promListing = $http.get("/data/prog.json");
     promListing.then(function(response){
-        ctrl.listings = response.data.date;
+        console.log(response.data.prog);
+        ctrl.listings = response.data;
+    });
+
+    $q.all([promListing]).then(function() {
+        console.log("Everything is loaded !");
+    }, function() {
+        console.error("OOPS !");
     });
 }]);

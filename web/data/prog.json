@@ -1,6 +1,3 @@
-// Jour -> prog[0-7]     (.date pour avoir le jour)
-// Salle -> prog[0-7].salles[0-1].name (DEBUSSY ou LUMIERE)
-//  Seances -> prog[0-7].salles[0-1].seances["8:30-11:00" | .....].film --> index du film
 {
   "prog" : [
     {
