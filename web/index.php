@@ -34,12 +34,21 @@
                         </tr>
                         <tr>
                             <td class="date">samedi 14</td>
-                            <td>film 1</td>
+                            <td>
+                                <!-- single -->
+                                <div class="film">
+                                    <div class="film-title">Titre</div>
+                                    <div class="film-realisateur">Réalisateur</div>
+                                    <div class="film-horaire">08:30</div>
+                                    <div class="film-demande">demander</div>
+                                </div>
+                                <!-- /single -->
+                            </td>
                             <td>film 2</td>
-                            <td>film 3</td>
+                            <td class="orange">film 3</td>
                             <td class="empty empty-bg"></td>
                             <td>film 4</td>
-                            <td>film 5</td>
+                            <td class="gris">film 5</td>
                             <td>film 6</td>
                             <td class="empty empty-bg"></td>
                         </tr>
