@@ -22,12 +22,16 @@ app.controller('FrontController', ['$scope', '$http', '$rootScope', function($sc
 
 app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', function($scope, $http, $rootScope, $q) {
     var ctrl = this;
+    this.films = [];
 
     var promListing = $http.get("/data/prog.json");
     promListing.then(function(response){
+        ctrl.films = response.data.prog;
         console.log(response.data.prog);
-        ctrl.listings = response.data;
     });
+
+    //var date = ctrl.films.substring(8,10);
+    //ctrl.films.push(newRow);
 
     $q.all([promListing]).then(function() {
         console.log("Everything is loaded !");

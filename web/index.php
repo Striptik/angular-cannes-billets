@@ -23,11 +23,10 @@
         <h1>Festival de Cannes - Réservations</h1>
     </nav>
     <div class="all">
-        <div ng-controller="ReservationController"></div>
         <div class="container">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="">
+                    <table ng-controller="ReservationController as ctrl">
                         <tr>
                             <th class="empty"> </th>
                             <th class="salles">Debussy</th>
@@ -52,6 +51,17 @@
                             <td class="gris">film 5</td>
                             <td>film 6</td>
                             <td class="empty empty-bg"></td>
+                        </tr>
+                        <tr ng-repeat="film in ctrl.films | filter:q as results">
+                            <td>{{film.date}}</td>
+                            <td ng-if="results.length > 0"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
