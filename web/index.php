@@ -53,16 +53,16 @@
                             <td>film 6</td>
                             <td class="empty empty-bg"></td>
                         </tr>
-                        <tr ng-repeat="day in ctrl.calendar | filter:q as results">
+                        <tr ng-repeat="day in ctrl.calendar">
                             <td>{{day.date | date: 'EEEE'}} {{day.date | date: 'd'}}</td>
-                            <td ng-if="results.length > 0"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td ng-if="">{{day.salles[0].seances[0].Heure}}</td>
+                            <td >{{day.salles[1].seances[0].Heure}}</td>
+                            <td>{{day.salles[1].seances[1].Heure}}</td>
+                            <td>{{day.salles[1].seances[2].Heure}}</td>
+                            <td>{{day.salles[1].seances[3].Heure}}</td>
+                            <td>{{day.salles[1].seances[4].Heure}}</td>
+                            <td>{{day.salles[1].seances[5].Heure}}</td>
+                            <td>{{day.salles[1].seances[6].Heure}}</td>
                         </tr>
                     </table>
                 </div>

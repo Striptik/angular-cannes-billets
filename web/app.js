@@ -1,29 +1,10 @@
 var app = angular.module("CannesReservation", ["ngTouch", "ngRoute"]);
 
-app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.
-    when('/', {
-        templateUrl: 'templates/index.html',
-        controller: "FrontController",
-        controllerAs: "ctrl",
-        activetab: 'home'
-    }).
-    when('/game', {
-        templateUrl: 'templates/reservation.html',
-        controller: "ReservationController",
-        controllerAs: "ctrl",
-        activetab: 'reservation'
-    })
-}]);
-
-app.controller('FrontController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
-
-}]);
-
 app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', function($scope, $http, $rootScope, $q) {
     var ctrl = this;
     ctrl.films = [];
     ctrl.calendar = [];
+    ctrl.isHD = false;
 
     var promCalendar = $http.get("/data/prog.json");
     promCalendar.then(function(response){
@@ -45,8 +26,24 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
 
         // Traiter les dates
         // Creer le calendrier
+        var test = ctrl.calendar[0].salles[1].seances[4].HD
+        //console.log(ctrl.calendar[0].salles[1].seances[4].HD);
+
+        ctrl.calendar.forEach(function(e) {
+            console.log(e);
+            //ctrl.checkIfSeanceIsHD(test);
+        });
 
     }, function() {
         console.error("OOPS !");
     });
+
+
+
+    ctrl.checkIfSeanceIsHD = function(seance) {
+        if(seance.length == 1) {
+            ctrl.isHD = true;
+        }
+        console.log(ctrl.isHD);
+    };
 }]);
