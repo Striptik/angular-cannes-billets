@@ -33,32 +33,18 @@
                             <th class="salles">Debussy</th>
                             <th colspan=7>Lumière</th>
                         </tr>
-                        <tr>
-                            <td class="date">samedi 14</td>
-                            <td>
-                                <!-- single -->
-                                <div class="film">
-                                    <div class="film-title">Titre</div>
-                                    <div class="film-realisateur">Réalisateur</div>
-                                    <div class="film-horaire">08:30</div>
-                                    <div class="film-demande">demander</div>
-                                </div>
-                                <!-- /single -->
-                            </td>
-                            <td>film 2</td>
-                            <td class="orange">film 3</td>
-                            <td class="empty empty-bg"></td>
-                            <td>film 4</td>
-                            <td class="gris">film 5</td>
-                            <td>film 6</td>
-                            <td class="empty empty-bg"></td>
-                        </tr>
                         <tr ng-repeat="day in ctrl.calendar">
-                            <td>{{day.date | date: 'EEEE'}} {{day.date | date: 'd'}}</td>
+                            <td class="date">{{day.date | date: 'EEEE'}} {{day.date | date: 'd'}}</td>
                             <td ng-if="">{{day.salles[0].seances[0].Heure}}</td>
-                            <td ng-repeat="seance in day.salles[1].seances" >
-                                {{seance.film}}
-                                {{seance.Heure}}
+                            <td ng-repeat="seance in day.salles[1].seances">
+                                <div class="empty empty-bg" ng-if="seance.film == null"></div>
+                                <div class="film" ng-click="bookFilm(seance, $event)" ng-if="seance.film != null" data-id="seance.film.id">
+                                    <div class="film-title">{{seance.film.name}}</div>
+                                    <div class="film-realisateur">{{seance.film.real}}</div>
+                                    <div class="film-horaire">{{seance.Heure}}</div>
+                                    <div class="film-demande">demander</div>
+                                    <div class="hd" ng-if="seance.HD==1"></div>
+                                </div>
                             </td>
                         </tr>
                     </table>
