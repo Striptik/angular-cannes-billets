@@ -42,7 +42,6 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
         if(seance.length == 1) {
             ctrl.isHD = true;
         }
-        console.log(ctrl.isHD);
     };
     
     ctrl.linkFilmCalendar = function() {
