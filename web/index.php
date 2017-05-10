@@ -13,6 +13,7 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-touch/angular-touch.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
     <script src="app.js"></script>
 
     <title>Réservation Festival Cannes</title>
@@ -52,8 +53,8 @@
                             <td>film 6</td>
                             <td class="empty empty-bg"></td>
                         </tr>
-                        <tr ng-repeat="film in ctrl.films | filter:q as results">
-                            <td>{{film.date}}</td>
+                        <tr ng-repeat="day in ctrl.calendar | filter:q as results">
+                            <td>{{day.date | date: 'EEEE'}} {{day.date | date: 'd'}}</td>
                             <td ng-if="results.length > 0"></td>
                             <td></td>
                             <td></td>
