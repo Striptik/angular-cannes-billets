@@ -28,25 +28,40 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
     var promCalendar = $http.get("/data/prog.json");
     promCalendar.then(function(response){
         ctrl.calendar = response.data.prog;
-        console.log(ctrl.calendar);
+        //console.log(ctrl.calendar);
     });
 
     var promFilm = $http.get("/data/films.json");
     promFilm.then(function(response){
         ctrl.films = response.data.films;
-        console.log(ctrl.films)
+        //console.log(ctrl.films)
     });
 
-    //var date = ctrl.films.substring(8,10);
-    //ctrl.films.push(newRow);
 
     $q.all([promFilm, promCalendar]).then(function() {
         console.log("Everything is loaded !");
 
+        ctrl.linkFilmCalendar();
+        console.log(ctrl.calendar)
         // Traiter les dates
         // Creer le calendrier
 
     }, function() {
         console.error("OOPS !");
     });
+
+    ctrl.linkFilmCalendar = function() {
+        for (var i = 0; i < ctrl.calendar.length; i++) {
+            for (var j = 0; j < ctrl.calendar[i].salles.length; j++) {
+                for (var k = 0; k < ctrl.calendar[i].salles[j].seances.length; k++) {
+                    if (ctrl.calendar[i].salles[j].seances[k].film !== 'null') {
+                        film_id = parseInt(ctrl.calendar[i].salles[j].seances[k].film)
+                        ctrl.calendar[i].salles[j].seances[k].film = ctrl.films[0][film_id]
+                    } else {
+                        ctrl.calendar[i].salles[j].seances[k].film = null
+                    }
+                }
+            }
+        }
+    }
 }]);
