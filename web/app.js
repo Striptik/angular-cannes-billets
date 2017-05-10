@@ -4,34 +4,24 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
     var ctrl = this;
     ctrl.films = [];
     ctrl.calendar = [];
-    ctrl.isHD = false;
+    ctrl.credit = 7;
 
+    // Retrieve jsons data
     var promCalendar = $http.get("/data/prog.json");
     promCalendar.then(function(response){
         ctrl.calendar = response.data.prog;
-        //console.log(ctrl.calendar);
     });
 
     var promFilm = $http.get("/data/films.json");
     promFilm.then(function(response){
         ctrl.films = response.data.films;
-        //console.log(ctrl.films)
     });
 
     $q.all([promFilm, promCalendar]).then(function() {
-        console.log("Everything is loaded !");
-
         ctrl.linkFilmCalendar();
-        console.log(ctrl.calendar)
-        // Traiter les dates
-        // Creer le calendrier
-
-        var test = ctrl.calendar[0].salles[1].seances[4].HD
-        //console.log(ctrl.calendar[0].salles[1].seances[4].HD);
 
         ctrl.calendar.forEach(function(e) {
             console.log(e);
-            //ctrl.checkIfSeanceIsHD(test);
         });
 
     }, function() {
@@ -50,7 +40,7 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
                 for (var k = 0; k < ctrl.calendar[i].salles[j].seances.length; k++) {
                     if (ctrl.calendar[i].salles[j].seances[k].film !== 'null') {
                         film_id = parseInt(ctrl.calendar[i].salles[j].seances[k].film)
-                        ctrl.calendar[i].salles[j].seances[k].film = ctrl.films[0][film_id]
+                        ctrl.calendar[i].salles[j].seances[k].film = ctrl.films[film_id]
                     } else {
                         ctrl.calendar[i].salles[j].seances[k].film = null
                     }
