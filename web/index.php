@@ -47,7 +47,9 @@
                                     <div class="film-title">{{seance.film.name}}</div>
                                     <div class="film-realisateur">{{seance.film.real}}</div>
                                     <div class="film-horaire">{{seance.Heure}}</div>
-                                    <div class="film-demande">demander</div>
+                                    <div class="film-demande demander">demander</div>
+                                    <div class="film-demande demandee">demandée</div>
+                                    <div class="film-demande film_demande">Film demandé</div>
                                     <div class="hd" ng-if="seance.HD==1"></div>
                                 </div>
                             </td>
