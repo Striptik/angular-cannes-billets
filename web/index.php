@@ -42,7 +42,7 @@
                             <td ng-if="">{{day.salles[0].seances[0].Heure}}</td>
                             <td ng-repeat="seance in day.salles[1].seances">
                                 <div class="empty empty-bg" ng-if="seance.film == null"></div>
-                                <div class="film" ng-click="bookFilm(seance, $event)" ng-if="seance.film != null" data-id="{{seance.id}}">
+                                <div class="film" ng-click="bookFilm(seance, $event)" ng-if="seance.film != null" data-id="{{seance.id}}" data-uniqueId="{{seance.id_unique}}">
                                     <div class="color-action"></div>
                                     <div class="film-title">{{seance.film.name}}</div>
                                     <div class="film-realisateur">{{seance.film.real}}</div>
