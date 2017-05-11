@@ -1,6 +1,8 @@
 var app = angular.module("CannesReservation", ["ngTouch", "ngRoute"]);
 
-app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', function($scope, $http, $rootScope, $q) {
+app.controller('ReservationController', ['$scope', '$http', '$q', function($scope, $http, $q) {
+
+    // Init
     var ctrl = this;
     ctrl.films = [];
     ctrl.calendar = [];
@@ -25,15 +27,11 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
         ctrl.linkFilmCalendar();
 
     }, function() {
-        console.error("OOPS !");
+        console.error("OOPS ! Error in Loading");
     });
 
-    ctrl.checkIfSeanceIsHD = function(seance) {
-        if(seance.length == 1) {
-            ctrl.isHD = true;
-        }
-    };
 
+    // Handle Booking
     $scope.bookFilm = function (seance, ev) {
         //Film already booked
         if (ctrl.bookedFilms.indexOf(seance.id) !== -1) {
@@ -54,6 +52,7 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
                         var unbooked = el.attributes.getNamedItem("class").value;
                         var classes = unbooked.split(" ");
                         var newClasses = ''
+                        // Rewrite class without the booking classes
                         classes.forEach(function (c) {
                             console.log(c)
                             if (c != "filmBooked" && c != "selected") {
@@ -76,6 +75,7 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
         // Film not booked
         } else {
             if (ctrl.id_unique.indexOf(seance.id_unique) === -1) {
+                //Spend credits for High Demand seances
                 if (seance.HD === '1') {
                     if (ctrl.credit >= 2) {
                         ctrl.credit -= 2
@@ -83,6 +83,7 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
                     } else {
                         alert('Vous n\'avez pas le nombre de crédit nécessaire')
                     }
+                // Spend credit for usual seances
                 } else {
                     if (ctrl.credit >= 1) {
                         ctrl.credit -= 1
@@ -96,22 +97,24 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
         }
     }
 
-
+    // To book After verification for the credits availble
     ctrl.continueBooking = function(seance, ev) {
         ctrl.bookedFilms.push(seance.id)
         ctrl.id_unique.push(seance.id_unique)
+        // Find all film with sameId and add 'filmBooked'
         var sameFilm = angular.element(document.querySelectorAll("[data-id='"+seance.id+"']"));
         angular.forEach(sameFilm, function (el, k) {
             var booked = document.createAttribute("class")
             booked.value = el.attributes.getNamedItem("class").value + " filmBooked"
             el.attributes.setNamedItem(booked);
-        }) // class filmBooked a ajouter
+        })
+        // Add 'selected' for Ze Film selected
         var zeFilm = angular.element(document.querySelector("[data-uniqueId='"+seance.id_unique+"']"));
         zeFilm.addClass('selected')
     }
 
 
-    
+    // Associate the Json
     ctrl.linkFilmCalendar = function() {
         var unique = 0;
         for (var i = 0; i < ctrl.calendar.length; i++) {
