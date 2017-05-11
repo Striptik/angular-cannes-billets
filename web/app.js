@@ -55,7 +55,8 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
                         var classes = unbooked.split(" ");
                         var newClasses = ''
                         classes.forEach(function (c) {
-                            if (c != "filmBooked") {
+                            console.log(c)
+                            if (c != "filmBooked" && c != "selected") {
                                 newClasses += c + " "
                             }
                         })
@@ -97,7 +98,6 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
 
 
     ctrl.continueBooking = function(seance, ev) {
-        console.log(ev)
         ctrl.bookedFilms.push(seance.id)
         ctrl.id_unique.push(seance.id_unique)
         var sameFilm = angular.element(document.querySelectorAll("[data-id='"+seance.id+"']"));
@@ -106,10 +106,8 @@ app.controller('ReservationController', ['$scope', '$http', '$rootScope', '$q', 
             booked.value = el.attributes.getNamedItem("class").value + " filmBooked"
             el.attributes.setNamedItem(booked);
         }) // class filmBooked a ajouter
-        var booked = document.createAttribute("class")
-        booked.value = ev.srcElement.attributes.getNamedItem("class").value + " orange"
-        ev.srcElement.attributes.setNamedItem(booked)
-
+        var zeFilm = angular.element(document.querySelector("[data-uniqueId='"+seance.id_unique+"']"));
+        zeFilm.addClass('selected')
     }
 
 
