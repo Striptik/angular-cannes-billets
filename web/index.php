@@ -23,11 +23,12 @@
         <img src="images/logo-festival-de-cannes.png" height="50" class="d-inline-block align-top" alt="">
         <h1>Festival de Cannes - Réservations</h1>
     </nav>
-    <div class="all">
+    <div class="all" ng-controller="ReservationController as ctrl">
         <div class="container">
             <div class="row">
+                <div class="credit"> <b>Il vous reste {{ ctrl.credit }} credits.</b> </div>
                 <div class="table-responsive">
-                    <table ng-controller="ReservationController as ctrl">
+                    <table>
                         <tr>
                             <th class="empty"> </th>
                             <th class="salles">Debussy</th>
@@ -38,7 +39,8 @@
                             <td ng-if="">{{day.salles[0].seances[0].Heure}}</td>
                             <td ng-repeat="seance in day.salles[1].seances">
                                 <div class="empty empty-bg" ng-if="seance.film == null"></div>
-                                <div class="film" ng-click="bookFilm(seance, $event)" ng-if="seance.film != null" data-id="seance.film.id">
+                                <div class="film" ng-click="bookFilm(seance, $event)" ng-if="seance.film != null" data-id="{{seance.id}}">
+                                    <div class="color-action"></div>
                                     <div class="film-title">{{seance.film.name}}</div>
                                     <div class="film-realisateur">{{seance.film.real}}</div>
                                     <div class="film-horaire">{{seance.Heure}}</div>

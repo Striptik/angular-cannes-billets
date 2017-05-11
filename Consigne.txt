@@ -81,3 +81,14 @@ Seront jugés :
  - Le soin apporté à la réflexion
 
 __Bon courage !__
+
+
+
+AFFICHER LE NOMBRE DE CREDITS => CSS
+
+Afficher les bonnes couleurs (gris/orange/blanc)
+Changer Icone Point d'interrogation -> Sablier
+Changer 'demander' en demandée
+Pas de curseur de selection (main) sur les seances grisées
+
+
