@@ -26,7 +26,10 @@
     <div class="all" ng-controller="ReservationController as ctrl">
         <div class="container">
             <div class="row">
-                <div class="credit"> <b>Il vous reste {{ ctrl.credit }} credits.</b> </div>
+                <div class="credit">
+                    <span>{{ ctrl.credit }}</span>
+                    <p>crédits</p>
+                </div>
                 <div class="table-responsive">
                     <table>
                         <tr>
